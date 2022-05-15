@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+Please select your phone number by visiting the page containing the range it is in.
+
+<style>
+    ul {
+        display:flex;
+        flex-wrap:wrap;
+        column-gap: 32px;
+    }
+</style>
+
+<ul id="list">
+
+</ul>
+
+<script>
+    params = new URLSearchParams(window.location.search);
+    depth = params.get("depth");
+    range = parseInt(params.get("range"));
+    if(!depth){
+        depth = 11;
+    }
+    if(!range){
+        range = 0;
+    }
+
+    list = document.getElementById("list")
+
+    depthChange = 2;
+
+    maxVal = parseInt("1" + "0".repeat(depth));
+    if(depth > 1){
+        iter = parseInt("1" + "0".repeat(depth - depthChange));
+    } else {
+        iter = 1;
+    }
+    
+
+    for(i = range; i < maxVal + range; i += iter){
+        newItem = document.createElement("li");
+        newLink = document.createElement("a");
+
+        first = i.toString()
+        if(depth > 1){
+            last = (parseInt(i) + parseInt("9".repeat(depth - depthChange))).toString();
+        
+            newLink.innerText = first.padStart(11, '0') + "-" + last.padStart(11, '0');
+            newLink.href = window.location.href.split('?')[0] + "?depth=" + (depth - depthChange).toString() + "&range=" + i;
+        } else {
+            newLink.innerText = i.toString().padStart(11, '0');
+            newLink.href = window.location.href.split('?')[0] + "/../submit?number=" + newLink.innerText;
+        }
+
+        newItem.appendChild(newLink);
+        list.appendChild(newItem)
+
+        console.log(i);
+    }
+</script>

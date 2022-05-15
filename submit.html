@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<p>You have selected <span id="number"></span> as your telephone number. Is this correct? If so, press the submit button below. If this is not your telephone, please resubmit the form.</p>
+
+<a href="../"><button>Resubmit form</button></a>
+<button onclick="alert(`This website doesn't do anything with your phone number. Congratulations on getting this far though!`)">Submit</button>
+
+<script>
+    params = new URLSearchParams(window.location.search);
+    num = params.get("number");
+
+    document.getElementById("number").innerText = num;
+</script>
