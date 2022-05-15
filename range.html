@@ -10,13 +10,31 @@ Please select your phone number by visiting the page containing the range it is 
         flex-wrap:wrap;
         column-gap: 32px;
     }
+
+    li a:link, li a:visited, li {
+        font-family: cursive;
+        color: yellow;
+    }
 </style>
 
 <ul id="list">
 
 </ul>
 
+<a href="../terrible-phone-selector/"><button>Resubmit form</button></a>
+
 <script>
+    // https://stackoverflow.com/a/12646864/12646131
+    /* Randomize array in-place using Durstenfeld shuffle algorithm */
+    function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+
     params = new URLSearchParams(window.location.search);
     depth = params.get("depth");
     range = parseInt(params.get("range"));
@@ -37,9 +55,16 @@ Please select your phone number by visiting the page containing the range it is 
     } else {
         iter = 1;
     }
-    
 
+    nums = [];
     for(i = range; i < maxVal + range; i += iter){
+        nums.push(i);
+    }
+    
+    shuffleArray(nums);
+
+    nums.forEach(i => {
+        
         newItem = document.createElement("li");
         newLink = document.createElement("a");
 
@@ -56,7 +81,5 @@ Please select your phone number by visiting the page containing the range it is 
 
         newItem.appendChild(newLink);
         list.appendChild(newItem)
-
-        console.log(i);
-    }
+    });
 </script>
