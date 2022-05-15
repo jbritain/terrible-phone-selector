@@ -1,6 +1,14 @@
-{% remote_include https://jbritain.github.io/templates/before %}
-<title>A really bad telephone number selector form</title>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A really bad telephone number selector form</title>
+    </head>
 
-{{ content }}
+    <body>
+        {{ content }}
 
-{% remote_include https://jbritain.github.io/templates/after %}
+        <footer>
+            <p>Copyright 2021-{{ 'now' | date: "%Y" }}, <a href="https://jbritain.github.io">Joshua Britain.</a> All rights reserved.</p>
+        </footer>
+    </body>
+</html>
